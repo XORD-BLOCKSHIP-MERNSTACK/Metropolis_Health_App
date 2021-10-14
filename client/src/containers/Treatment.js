@@ -1,6 +1,6 @@
 import React from 'react';
 
-// Custom Components
+// Custom Component
 import Input from '../components/inputbox/Input';
 
 const Treatment = () => {
