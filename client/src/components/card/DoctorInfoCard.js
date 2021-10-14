@@ -3,7 +3,7 @@ import React from 'react';
 import { Card } from 'react-bootstrap';
 
 const DoctorInfoCard = (props) => {
-  //   const { doctor } = props.data.name;
+  //   const { doctor } = props.data;
 
   return (
     <Card style={{ width: '18rem' }}>

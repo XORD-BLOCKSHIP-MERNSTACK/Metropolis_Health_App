@@ -1,15 +1,15 @@
 import React from 'react';
-import AppoinmentContextProvider from './AppoinmentContext';
+import AppointmentContextProvider from './AppointmentContext';
 import TreatmentContextProvider from './TreatmentContext';
 import UserContextProvider from './UserContext';
 
 const ContextProvider = (props) => {
   return (
-    <AppoinmentContextProvider>
+    <AppointmentContextProvider>
       <TreatmentContextProvider>
         <UserContextProvider>{props.children}</UserContextProvider>
       </TreatmentContextProvider>
-    </AppoinmentContextProvider>
+    </AppointmentContextProvider>
   );
 };
 

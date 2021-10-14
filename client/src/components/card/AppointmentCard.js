@@ -2,7 +2,7 @@ import React from 'react';
 // Styled Component
 import { Card } from 'react-bootstrap';
 
-const AppoinmentCard = (props) => {
+const AppointmentCard = (props) => {
   const { patientID, doctorID, time, status } = props;
 
   return (
@@ -20,4 +20,4 @@ const AppoinmentCard = (props) => {
   );
 };
 
-export default AppoinmentCard;
+export default AppointmentCard;
