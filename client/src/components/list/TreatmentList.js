@@ -13,7 +13,7 @@ const TreatmentList = () => {
     <div>
       {treatments ? (
         treatments.map((data, index) => {
-          <TreatmentCard key={index} data={data} />;
+          return <TreatmentCard key={index} data={data} />;
         })
       ) : (
         <h3>No Treatments or Prescriptions provided by doctor.</h3>

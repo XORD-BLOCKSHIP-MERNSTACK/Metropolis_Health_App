@@ -13,7 +13,7 @@ const DoctorList = () => {
     <div>
       {doctorList ? (
         doctorList.map((data, index) => {
-          <DoctorInfoCard key={index} data={data} />;
+          return <DoctorInfoCard key={index} data={data} />;
         })
       ) : (
         <h3>No Active Doctors</h3>

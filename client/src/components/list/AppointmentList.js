@@ -13,7 +13,7 @@ const AppointmentList = () => {
     <div>
       {appointments ? (
         appointments.map((data, index) => {
-          <AppointmentCard key={index} data={data} />;
+          return <AppointmentCard key={index} data={data} />;
         })
       ) : (
         <h3>No Appointment Bookings</h3>
