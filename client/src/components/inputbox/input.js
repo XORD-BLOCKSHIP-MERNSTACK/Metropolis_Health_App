@@ -5,6 +5,7 @@ const Input = (props) => {
 
   return (
     <input
+      className='input'
       value={value}
       disabled={disabled}
       type={type}

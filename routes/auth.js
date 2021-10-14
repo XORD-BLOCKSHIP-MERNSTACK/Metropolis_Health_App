@@ -1,4 +1,4 @@
-import express from 'express';
+import express from "express";
 
 // Controllers
 import {
@@ -6,14 +6,18 @@ import {
   login,
   forgotpassword,
   resetpassword,
-} from '../controllers/auth.js';
+  authenticateToken,
+} from "../controllers/auth.js";
+
+import protect from "../middleware/auth.js";
 
 const router = express.Router();
 
 // Routes
-router.route('/register').post(register);
-router.route('/login').post(login);
-router.route('/forgotpassword').post(forgotpassword);
-router.route('/resetpassword/:resetToken').post(resetpassword);
+router.route("/getMe").get(protect, authenticateToken);
+router.route("/register").post(register);
+router.route("/login").post(login);
+router.route("/forgotpassword").post(forgotpassword);
+router.route("/resetpassword/:resetToken").post(resetpassword);
 
 export default router;

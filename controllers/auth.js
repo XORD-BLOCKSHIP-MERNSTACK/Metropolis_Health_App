@@ -1,18 +1,16 @@
-import User from '../models/userModel.js';
-import errorResponse from '../utils/errorResponse.js';
-import sendEmail from '../utils/sendEmail.js';
+import User from "../models/userModel.js";
+import errorResponse from "../utils/errorResponse.js";
+import sendEmail from "../utils/sendEmail.js";
 
 export const register = async (req, res, next) => {
-  // Destruncturing json data of the request body
   const { username, email, password, userType } = req.body;
-  // Checking if user already exist
+
   const userExists = await User.findOne({ email });
 
   if (userExists) {
-    res.status(400);
-    throw new Error('User already exists');
+    return res.status(400).json({ Message: "User already exists" });
   }
-  //Creating User
+
   const user = await User.create({
     username,
     email,
@@ -29,19 +27,19 @@ export const login = async (req, res, next) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    return next(new errorResponse('Please provide a password and email', 400));
+    return next(new errorResponse("Please provide a password and email", 400));
   }
 
-  const user = await User.findOne({ email }).select('+password');
+  const user = await User.findOne({ email }).select("+password");
 
   if (!user) {
-    return next(new errorResponse('Invalid Credentials', 404));
+    return next(new errorResponse("Invalid Credentials", 404));
   }
 
   const isMatch = await user.matchPassword(password);
 
   if (!isMatch) {
-    return next(new errorResponse('Invalid Credentials', 404));
+    return next(new errorResponse("Invalid Credentials", 404));
     // res.status(404).json({
     //   success: false,
     //   error: 'Invalid Credentials',
@@ -60,7 +58,7 @@ export const forgotpassword = async (req, res, next) => {
   // await user.save();
 };
 export const resetpassword = (req, res, next) => {
-  res.send('Reset Password Route');
+  res.send("Reset Password Route");
 };
 
 const sendToken = (user, statusCode, res) => {
@@ -83,14 +81,24 @@ const sendRegistrationEmail = (user, statusCode, res) => {
   try {
     sendEmail({
       to: user.email,
-      subject: 'Account Verification',
+      subject: "Account Verification",
       text: message,
     });
     res.status(statusCode).json({
       success: true,
-      data: 'Email Sent',
+      data: "Email Sent",
     });
   } catch (err) {
-    next(new errorResponse('Email could not be send', 500));
+    next(new errorResponse("Email could not be send", 500));
   }
+};
+
+export const authenticateToken = async (req, res) => {
+  const user = req.user;
+
+  if (Boolean(user)) {
+    return res.status(200).json({ user });
+  }
+
+  return res.status(400).json({ Message: "Not Authorized" });
 };

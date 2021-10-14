@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 
+// Link
+import { Link } from 'react-router-dom';
+
 // Custom Components
 import Input from '../components/inputbox/Input';
 
@@ -39,6 +42,9 @@ const SignUp = () => {
         onChange={(e) => setType(e.target.value)}
       />
       <button>Sign Up</button>
+      <Link to='/signin'>
+        <button>Sign In</button>
+      </Link>
     </div>
   );
 };
