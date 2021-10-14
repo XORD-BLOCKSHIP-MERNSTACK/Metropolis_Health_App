@@ -1,12 +1,12 @@
-import AppointmentModel from "../models/appointmentModel.js";
-import { UserTypes } from "../models/userModel.js";
+import AppointmentModel from '../models/appointmentModel.js';
+import { UserTypes } from '../models/userModel.js';
 
 export const createAppointment = async (req, res, next) => {
   const { doctorId, date, title, description } = req.body;
 
   if (Boolean(req.user) && req.user.userType === UserTypes.Patient) {
     if (!(doctorId && date && title && description)) {
-      return res.status(400).json({ Message: "Invalid Values" });
+      return res.status(400).json({ Message: 'Invalid Values' });
     }
 
     const appointment = await AppointmentModel.create({
@@ -18,11 +18,11 @@ export const createAppointment = async (req, res, next) => {
     });
 
     return res
-      .status(400)
-      .json({ Message: "Appointment Created", data: appointment });
+      .status(200)
+      .json({ Message: 'Appointment Created', data: appointment });
   }
 
-  return res.status(400).json({ Message: "Not Authorized" });
+  return res.status(400).json({ Message: 'Not Authorized' });
 };
 
 export const appointmentListing = async (req, res, next) => {
@@ -34,5 +34,5 @@ export const appointmentListing = async (req, res, next) => {
     entries = await AppointmentModel.find({ doctorId: req.user._id });
   }
 
-  return res.status(400).json({ data: entries });
+  return res.status(200).json({ data: entries });
 };
